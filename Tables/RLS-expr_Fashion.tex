@@ -1,0 +1,15 @@
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{ccccc}
+\toprule
+\makecell{Imbalance \\ ratio} & Model & Minority mean & KL score ($\downarrow$) & FID ($\downarrow$) \\
+\midrule
+\multirow{4}{*}{0.1} & RKM & 273 (±2) & 0.58 (±0.01) & 93.02 (±1.12) \\
+& RLS-RKM (class) & \textbf{623} (±13) & \textbf{0.20} (±0.02) & \textbf{70.92} (±0.28) \\
+& RLS-RKM (shared) & 437 (±2) & 0.38 (±0.02) & 80.98 (±2.35) \\
+& Iforest RKM & 406 (±48) & 0.41 (±0.06) & 83.71 (±4.15) \\
+\bottomrule
+\end{tabular}
+    \caption{Results of experiments on unbalanced Fashion MNIST dataset. Experiments are replicated over 3 runs with random initializations. Means and standard deviations (enclosed in parentheses) for each metric are reported. "Minority mean" refers to the average number of samples generated from each minority mode.}
+    \label{tab-expr-fashion}
+\end{table}

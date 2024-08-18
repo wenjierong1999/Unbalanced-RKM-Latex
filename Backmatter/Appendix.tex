@@ -1,0 +1,106 @@
+\chapter{Supplementary material for
+Chapter \ref{chap-methods}}
+\section{Derivation of the conditional distribution of GMM}
+\label{A-conGMM}
+Given that the latent variable $\bh$ and its corresponding label $\by$ (in the form of one-hot encoding). We assume that their joint PDF is modeled by a mixture of multivariate Gaussians:
+\begin{equation}
+    p(\bh,\by) = \sum_{k=1}^{l}\pi_{k}\Normal(\bh_{cat}|\bmu_{k},\bSigma_{k})
+\end{equation}
+where $\bh_{cat}$ is the concatenated vector of $\bh$ and $\by$. Recall that the conditionals or the marginals of a multivariate Gaussian results in another Gaussian distribution. More specifically, for a multivariate Gaussian distribution $p(\bx) = \Normal(\bx|\bu,\bSigma)$ with the following partition 
+\begin{equation}
+    \bx = \begin{pmatrix}
+        \bx_a\\
+        \bx_b
+    \end{pmatrix},\quad
+    \bmu = \begin{pmatrix}
+        \bmu_a\\
+        \bmu_b
+    \end{pmatrix},\quad
+    \bSigma = \begin{pmatrix}
+        \bSigma_{aa} & \bSigma_{ab} \\
+        \bSigma_{ba} & \bSigma_{bb} \\
+    \end{pmatrix},
+\end{equation}
+the conditional distribution is given by
+\begin{equation}
+    p(\bx_a|\bx_b) = \Normal(\bx_a | \bmu_{a|b},\bSigma_{a|b}),
+\end{equation}
+where
+\begin{equation}
+    \begin{aligned}
+         \bmu_{a|b} &= \bmu_a + \bSigma_{ab} \bSigma_{bb}^{-1} (\bx_b - \bmu_b) \\
+    \bSigma_{a|b} &= \bSigma_{aa} - \bSigma_{ab} \bSigma_{bb}^{-1} \bSigma_{ba}.
+    \end{aligned}
+\end{equation}
+As for the marginal, it is simply given by $p(\bx_a) = \Normal(\bx_a|\bmu_a,\bSigma_{aa})$.
+
+Back to the setting of GMM, since conditional of each Gaussian is another Gaussian, the conditional distribution of $\bh$ given a certain class label is then characterized by another mixture of Gaussians:
+\begin{equation}
+    p(\bh | \by) = \sum_{k=1}^{l}\pi_k^{\prime}\Normal(\bh | \bmu_{\bh|\by,k},\bSigma_{\bh|\by,k}).
+\end{equation}
+To compute the updated weights $\pi_{k}^{\prime}$ for each component Gaussian, one needs to apply Bayes' rule:
+\begin{equation}
+    \begin{aligned}
+        p(\bh | \by) &= \frac{p(\bh,\by)}{p(\by)} \\
+        &= \sum_{k=1}^{l}\frac{\pi_k \Normal(\bh_{cat}|\bmu_k,\bSigma_k)}{p(\by)} \\
+        &= \sum_{k=1}^{l} \frac{\pi_k\Normal(\by|\bmu_{c,k},\bSigma_{\by\by,k})\Normal(\bh | \bmu_{\bh|\by,k},\bSigma_{\bh|\by,k})}{p(\by)} \\
+        &= \sum_{k=1}^{l}  \underbrace{\frac{\pi_k \Normal(\by|\bmu_{\by,k},\bSigma_{\by\by,k})}{\sum_{v=1}^{l}\pi_{v}\Normal(\by | \bmu_{\by,v},\bSigma_{\by\by,v})}}_{=\pi_{k}^{\prime}}\Normal(\bh | \bmu_{\bh|\by,k},\bSigma_{\bh|\by,k}).
+    \end{aligned}
+\end{equation}
+
+\chapter{Additional results of
+Chapter \ref{chap-expr}}
+
+\section{Generated Samples: Comparison Between Vanilla Gen-RKM and Gen-RKM with RLS Sampling Adaptation}
+
+\subsection{Unbalanced 012-MNIST}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{Figures/Methods/rkm-mnist012-gensamples-highlighted-minorities.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{Figures/Methods/RLS-mnist012-gensamples-highlighted-minorities.png}
+    \end{subfigure}
+    \caption{Generated images from the unbalanced 012-MNIST dataset by vanilla RKM (left) and RLS (class) sampling adapted RKM (right). Images are highlighted by a red border if classified as minority modes.}
+    \label{fig-gensamples-ubmnist012-rls}
+\end{figure}
+
+
+\subsection{Unbalanced MNIST}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{Figures/Methods/rkm-mnist-gensamples-highlighted-minorities.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{Figures/Methods/RLS-mnist-gensamples-highlighted-minorities.png}
+    \end{subfigure}
+    \caption{Generated images from the unbalanced MNIST dataset by vanilla RKM (left) and RLS (class) sampling adapted RKM (right). Images are highlighted by a red border if classified as minority modes.}
+    \label{fig-gensamples-ubmnist-rls}
+\end{figure}
+
+
+\subsection{Unbalanced Fashion MNIST}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{Figures/Methods/rkm-fashion-gensamples-highlighted-minorities.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{Figures/Methods/RLS-fashion-gensamples-highlighted-minorities.png}
+    \end{subfigure}
+    \caption{Generated images from the unbalanced Fashion MNIST dataset by vanilla RKM (left) and RLS (class) sampling adapted RKM (right). Images are highlighted by a red border if classified as minority modes.}
+    \label{fig-gensamples-ubfashion-rls}
+\end{figure}

@@ -1,0 +1,16 @@
+\begin{table}[ht]
+\centering
+\begin{tabular}{lccccc}
+\toprule
+                     Classifier &      Mode 1 &      Mode 2 &      \textbf{Mode 3} &       KL score($\downarrow$) &           FID($\downarrow$) \\
+\midrule
+     Alexnet\cite{krizhevskyImageNetClassificationDeep2012} & 3219 (±218) & 4183 (±125) & \textbf{2283} (±299) & \textbf{0.03} (±0.02) & \textbf{52.02} (±4.32) \\
+Inception\_v3\cite{szegedyRethinkingInceptionArchitecture2016} & 3998 (±242) & 4496 (±122) & 1206 (±278) & 0.12 (±0.04) &   60.4 (±4.4) \\
+    Resnet18\cite{heDeepResidualLearning2016} & 3706 (±188) &  4231 (±94) & 1738 (±286) & 0.06 (±0.02) &  57.31 (±3.7) \\
+    Resnet34\cite{heDeepResidualLearning2016} &  3328 (±59) & 4945 (±177) & 1486 (±231) &  0.1 (±0.02) &  55.34 (±3.0) \\
+       vgg16\cite{simonyanVeryDeepConvolutional2015} &  3765 (±77) & 4538 (±183) & 1446 (±130) & 0.09 (±0.02) & 59.53 (±2.11) \\
+\bottomrule
+\end{tabular}
+\caption{Ablation study over the impact of different pre-trained classifiers on the performance of RLS-RKM (class) on the unbalanced 012-MNIST dataset. Minority mode is highlighted in bold, with the imbalance ratio set to 0.1. The results are averaged over 5 runs of replicated experiments.}
+\label{expr-different-classifiers}
+\end{table}

@@ -1,0 +1,30 @@
+\begin{algorithm}[H]
+\caption{RLS Sampling in Gen-RKM with a shared feature map}
+\label{alg-rls-rkm-shared}
+\begin{algorithmic}[1]
+\Require training data $\bD = \{\bx_i\}_{i=1}^{N}$; mini-batch size $m$; \\
+regularization parameters $\eta, c_{\text{stab}}, \gamma_{RKM}$ for Gen-RKM; \\
+explicit feature map $\bphi_{\btheta}(.)$ and explicit pre-image map $\bpsi_{\boldsymbol{\zeta}}(.)$ for Gen-RKM; \\
+regularization parameter $\gamma_{RLS}$ for RLS sampling and dimension reduction size $k$;
+\LComment{Training loop}
+    \For {each epoch}
+        \For{each mini-batch $B \subset \bD$}
+        \LComment{two-stage sampling procedure}
+        \State $\bD_{s} \gets$ uniformly sample a subset from $\bD$ with size $20*m$ 
+        \State $\widetilde{\bphi}_{\btheta}(\bx_i) \gets \bZ_k^\top\bphi_{\btheta}(\bx_i),\quad \text{s.t.}\bx_i\in \bD_s$ \Comment{Gaussian sketching}
+        %\LComment{Compute RLS on $\bD_{s}$ under each iteration}
+        \State $l_i \gets \widetilde{\bphi}_{\btheta}(\bx_i)^\top(\bS_{\widetilde{\bphi}_{\btheta}}+\gamma_{RLS}\mathbf{I})^{-1}\widetilde{\bphi}_{\btheta}(\bx_i)$
+        \State $p_i \gets l_i / \sum_{j=1}^{20m} l_j$
+        \State $B \gets$ sample a mini-batch of size $m$ with probability $\bx_i \sim p_i$
+        \State do step 6-11 in algorithm \ref{alg-gen-rkm-dual}
+        \EndFor
+    \EndFor
+\LComment{Compute final RLS on full dataset}
+\State $\widetilde{\bphi}_{\btheta}(\bx_i) \gets \bZ_k^\top\bphi_{\btheta}(\bx_i),\quad \text{s.t.}\bx_i\in \bD$
+\State $l_i^{\text{final}} \gets \widetilde{\bphi}_{\btheta}(\bx_i)^\top(\bS_{\widetilde{\bphi}_{\btheta}}+\gamma_{RLS}\mathbf{I})^{-1}\widetilde{\bphi}_{\btheta}(\bx_i)$
+\State $p_i^{\text{final}} \gets l_i^{\text{final}} / \sum_{j=1}^N l_j^{\text{final}}$
+\LComment{Modified final computation step in Gen-RKM}
+\State $\bD_{\text{resampled}} \gets$ resample a dataset of size $N$ with probability $\bx_i \sim p_i^{\text{final}}$ 
+\State repeat step 7-9 in algorithm \ref{alg-gen-rkm-dual}  on $\bD_{\text{resampled}}$
+\end{algorithmic}
+\end{algorithm}

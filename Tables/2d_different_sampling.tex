@@ -1,0 +1,16 @@
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}l*{4}{>{\centering\arraybackslash}p{2.5cm}}@{}}
+\toprule
+& \multicolumn{2}{c}{Ring with 8 modes} & \multicolumn{2}{c}{Grid with 25 modes} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+& Num modes & Minority mean & Num modes & Minority mean \\
+\midrule
+RKM      & 4.7(0.67) & 17.4(8.02) & 13.4(0.97) & 3.45(0.63) \\
+RLS-RKM(shared)  & \textbf{7.7(0.48)} & 284.0(54.90) & 14.2(0.91) & \textbf{74.5(3.01)} \\
+RLS-RKM(rbf) & 7.0(1.25) & \textbf{344.73(43.71)} & \textbf{20.02(1.75)} & 62.6(3.97) \\
+\bottomrule
+\end{tabular}
+\caption{Results of experiments on 2D synthetic datasets (Experiments are replicated over 10 runs with random initialization).}
+\label{tab-2d}
+\end{table}

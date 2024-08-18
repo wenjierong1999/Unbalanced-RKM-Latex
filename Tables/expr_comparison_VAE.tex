@@ -1,0 +1,15 @@
+\begin{table}[ht]
+\centering
+\begin{tabular}{lcccccc}
+\toprule
+Model Name & Mode 1 & Mode 2 & \textbf{Mode 3} & KL Score($\downarrow$) & FID($\downarrow$) \\
+\midrule
+RKM & 4573(±44) & 5138(±90) & 165(±71) & 0.33(±0.02) & 61.60(±1.69) \\
+RLS-RKM & 3153(±72) & 4280(±40) & \textbf{2276}(±113) & \textbf{0.03}(±0.00) & \textbf{56.65}(±1.39) \\
+RLS-VAE & 3000(±78) & 4955(±198) & 1621(±262) & 0.10(±0.03) & 79.17(±2.70) \\
+VAE & 4216(±101) & 5409(±154) & 176(±14) & 0.34(±0.01) & 76.39(±1.42) \\
+\bottomrule
+\end{tabular}
+\caption{Results of comparison to VAE and RLS-VAE on the unbalanced 012-MNIST dataset with imbalance ratio 0.1. RLSs are computed by explicit feature map based on a pre-trained classifier.}
+\label{expr-comparison-vae}
+\end{table}

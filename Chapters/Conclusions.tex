@@ -1,0 +1,19 @@
+\chapter{Conclusions}
+\label{chap-conclu}
+This thesis investigated various sampling techniques for training the Gen-RKM model in scenarios with unbalanced inputs. These sampling strategies aimed at increasing the diversity of the model's generation in an imbalanced input context. Depending on the availability of data labels, the experiments were carried out in both supervised and unsupervised settings. 
+
+In the supervised learning context, unbalanced MNIST and unbalanced Fashion MNIST datasets have been specifically created to train the learning models. When comparing the results of inverse frequency sampling with the standard uniform sampling in Gen-RKM, it was obvious that inverse frequency sampling facilitated a more balanced generation of data and increased the generation of samples from minority classes during the training phase. Additionally, inverse frequency sampling demonstrated the capability to selectively generate samples from minority classes when integrated with conditional generation techniques in Gen-RKM.
+
+In the unsupervised context, RLS sampling and Iforest score sampling have been tested and discussed on 2D synthetic datasets, 012-MNIST, MNIST, and FashionMNIST datasets, with each of them having been tested with different imbalance ratios and different feature maps. The results of the experiments indicated that both RLS sampling and Iforest score sampling showed noticeable improvement compared to vanilla Gen-RKM in the diversity of model generation. RLS sampling with implicit feature maps performs well for low-dimensional data. RLS sampling, particularly when using fixed explicit feature maps such as pre-trained classifiers, delivered outstanding outcomes in high-dimensional scenarios on datasets with a limited number of modes. For datasets consisting of a large number of modes, such as those containing 10 or 25 modes, RLS sampling still outperformed the baseline and other sampling strategies, even though the results were not as impressive as those achieved with simpler datasets. 
+
+In addition, the risk of these over-sampling-based methods has been discussed, which provided insights for numerous future studies. We summarize the suggestions for future works as follows:
+\begin{itemize}[label={--}]
+    \item Instead of simply increasing the probability of sampling the minority, resampling the data in a more advanced way (e.g., applying differentiable augmentation for over-sampled data \cite{zhaoDifferentiableAugmentationDataEfficient2020}) to avoid the risk of data copying/over-fitting in the generation phase.
+    \item As the performance of RLS sampling is particularly dependent on the choice of feature map, finding more advanced feature extractors is intriguing.
+    \item Given the training of Gen-RKM with RLS sampling is quite computationally expensive, especially using shared feature maps, adaptions with faster RLS approximation schemes in the RKM framework are subject to future research.
+    \item Currently, our work is limited to Gen-RKM framework. RLS sampling (or other possible weighted sampling schemes) could also be extended to Stiefel RKM\cite{pandeyDisentangledRepresentationLearning2022} in the future.
+\end{itemize}
+
+
+
+% At first, instead of simply increasing the probability of sampling the minority, resampling the data in a more advanced way to avoid the risk of data copying/over-fitting in the generation phase. Second, as the performance of RLS sampling is particularly dependent on the choice of feature map, finding more advanced feature extractors is intriguing. Lastly, given the training of Gen-RKM with RLS sampling is quite computationally expensive, especially using shared feature maps, further research into optimizing the algorithm to reduce computational demands is necessary. 

@@ -1,0 +1,25 @@
+\begin{table}[htb]
+    \centering
+    \begin{tabular}{ccccc}
+\toprule
+\makecell{Imbalance \\ ratio} & Model & Minority & KL score ($\downarrow$) & FID ($\downarrow$) \\
+\midrule
+\multirow{4}{*}{0.05} & RKM & 75 (±34) & 0.37 (±0.02) & 64.97 (±2.25) \\
+& RLS-RKM (shared) & 410 (±60) & 0.32 (±0.02) & 74.09 (±3.39) \\
+& RLS-RKM (class) & \textbf{1563} (±201) & \textbf{0.09} (±0.02) & \textbf{55.95} (±4.52) \\
+& IforestRKM & 295 (±150) & 0.30 (±0.04) & 65.22 (±2.79) \\
+\midrule
+\multirow{4}{*}{0.10} & RKM & 135 (±76) & 0.35 (±0.03) & 65.04 (±1.74) \\
+& RLS-RKM (shared) & 782 (±64) & 0.24 (±0.01) & 70.02 (±1.07) \\
+& RLS-RKM (class) & \textbf{2259} (±144) & \textbf{0.03} (±0.01) & \textbf{55.42} (±6.33) \\
+& IforestRKM & 863 (±180) & 0.18 (±0.03) & 59.63 (±3.74) \\
+\midrule
+\multirow{4}{*}{0.30} & RKM & 842 (±113) & 0.18 (±0.02) & 56.98 (±1.54) \\
+& RLS-RKM (shared) & 2016 (±171) & 0.09 (±0.01) & 62.04 (±3.32) \\
+& RLS-RKM (class) & \textbf{2868} (±77) & \textbf{0.01} (±0.00) & 51.95 (±3.60) \\
+& IforestRKM & 2206 (±183) & 0.04 (±0.02) & \textbf{51.77} (±4.33) \\
+\bottomrule
+\end{tabular}
+    \caption{Results of experiments on the unbalanced 012-MNIST dataset under different imbalance ratios. Experiments are replicated over 5 runs with random initializations. Means and standard deviations (enclosed in parentheses) for each metric are reported.}
+    \label{expr-mnist012}
+\end{table}

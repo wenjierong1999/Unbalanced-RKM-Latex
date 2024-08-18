@@ -1,0 +1,15 @@
+\begin{table}[ht]
+\centering
+\begin{tabular}{lcccccc}
+\toprule
+Model Name & Mode 1 & Mode 2 & \textbf{Mode 3} & KL score($\downarrow$) & FID($\downarrow$) \\
+\midrule
+RKM & 4623(±106) & 5185(±62) & 85(±46) & 0.36(±0.02) & 64.17(±0.28) \\
+RLS-RKM & 3363(±196) & 4771(±162) & \textbf{1558}(±145) & \textbf{0.09}(±0.01) & \textbf{53.22}(±2.93) \\
+RLS-RKM (batch) & 4496(±47) & 5249(±67) & 166(±17) & 0.34(±0.01) & 62.68(±2.91) \\
+RLS-RKM (final) & 3759(±156) & 5111(±132) & 679(±186) & 0.21(±0.03) & 67.11(±6.06) \\
+\bottomrule
+\end{tabular}
+\caption{Ablation study over the significance of mini-batch sampling and final step resampling in RLS-RKM. This experiment is conducted on the unbalanced 012-MNIST dataset with imbalance ratio of 0.05. RLSs are computed by an explicit feature map based on a pre-trained classifier.}
+\label{expr-final-sample-or-mini-batch}
+\end{table}

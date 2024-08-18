@@ -1,0 +1,18 @@
+\begin{table}[ht]
+\centering
+\begin{tabular}{lccc}
+\toprule
+\multirow{2}{*}{Dataset} & \multirow{2}{*}{Input size} & \multicolumn{2}{c}{Architecture} \\
+\cmidrule(lr){3-4}
+ & & Feature map & Pre-image map \\
+\midrule
+2D Ring/Grid & $2$ & \makecell{FC 32 (Linear)\\ ReLu($\alpha=0.2$) \\ FC 64 (Linear) \\ ReLu($\alpha=0.2$) \\ FC 128 (Linear) } &  reverse of fm \\
+\midrule
+012-MNIST/MNIST/Fashion& $28\times 28\times 1$ & \makecell{Conv $32\times 4\times 4$\\ReLu($\alpha=0.2$) \\ Conv $64\times 4\times 4$ \\ ReLu($\alpha=0.2$) \\ FC 300 (Linear)}   & reverse of fm   \\
+
+
+\bottomrule
+\end{tabular}
+\caption{Details of network architectures used in Gen-RKM. All convolutional layers and transposed convolutional layers have stride 2 and padding 1. Pre-image map is the reverse of feature map architecture, except that a sigmoid activation function is implemented for the output layer \cite{pandeyGenerativeRestrictedKernel2021}.}
+\label{tab-network-architecture}
+\end{table}

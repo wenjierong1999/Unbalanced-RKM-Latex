@@ -1,0 +1,20 @@
+\begin{table}[ht]
+\centering
+\begin{tabular}{>{\raggedright\arraybackslash}m{8cm} >{\centering\arraybackslash}m{2cm} >{\centering\arraybackslash}m{2cm} >{\centering\arraybackslash}m{2cm}}
+\toprule
+\multirow{2}{*}{Hyperparameter} & \multicolumn{3}{c}{Dataset} \\
+\cmidrule(lr){2-4}
+ & 2D Ring/Grid & 012-MNIST  & MNIST/Fashion \\
+\midrule
+regularization parameters: $\{\eta,c_{\text{stab}},\gamma_{\text{RKM}}\}$ & \{1;1;100\} & \{1;1;100\}  & \{1;1;100\}  \\
+dimension of feature map: $d_f$ & 128 & 300 &300 \\
+dimension of latent space: $s$ & 8/25 & 10 & 10 \\
+mini-batch size: $m$ & 256 & 328 & 328 \\
+maximum epoch number: $N_{\text{epoch}}$ & 150 & 100 & 150\\
+number of Gaussian components in GMM: $l$ &8/25 & 3 & 10 \\
+learning rate & 0.0001 & 0.0001 & 0.0001 \\
+\bottomrule
+\end{tabular}
+\caption{Hyperparameter settings for Gen-RKM}
+\label{tab-Gen-RKM-setting}
+\end{table}

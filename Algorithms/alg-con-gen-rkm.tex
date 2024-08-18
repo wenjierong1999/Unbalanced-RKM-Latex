@@ -1,0 +1,15 @@
+\begin{algorithm}[H]
+\caption{Conditional generation algorithm in Gen-RKM}
+\label{alg-con-gen-rkm}
+\begin{algorithmic}[1]
+    \Require trained explicit pre-image map $\bpsi_{\boldsymbol{\zeta}}(.)$, interconnection matrix $\bW$; \\
+    latent variables $\bH = [\bh_1,\dots,\bh_N] \in \bbR^{d\times N}$; \\
+            class labels for each data point $\bY = [\by_1,\dots,\by_N] \in \bbR^{c\times N}$ (in one-hot encoding form, $c$ is the number of classes);\\
+            conditioned class label $\by \in \bbR^{c}$ (in one-hot encoding form);\\
+            number of Gaussian components in GMM $l$;
+    \State $\bH_{cat} \gets [\bH^\top; \bY^\top]^\top \in \bbR^{(d+c)\times N}$
+    \State $p(\bh,\by) \gets \text{GMM}_{l}(\bH_{cat})$
+    \State $\bh^* \sim p(\bh|\by)$
+    \State $\bx_{\text{gen}} \gets \bpsi_{\boldsymbol{\zeta}}(\bW \bh^{*})$
+\end{algorithmic}
+\end{algorithm}

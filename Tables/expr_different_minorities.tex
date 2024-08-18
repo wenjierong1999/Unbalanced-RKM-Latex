@@ -1,0 +1,20 @@
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{ccccc}
+\toprule
+\makecell{Minority \\ label} & Model & Minority mean & KL score ($\downarrow$) & FID ($\downarrow$) \\
+\midrule
+\multirow{4}{*}{0} &  RKM & 476 (±17) & 0.25 (±0.0) & 56.81 (±0.41) \\
+  &  RLS-RKM (class) &      \textbf{2481} (±325) &  \textbf{0.02} (±0.01) & \textbf{52.75} (±2.68) \\
+         & RLS-RKM (shared) &      1332 (±130) &  0.18 (±0.02) & 64.02 (±7.22) \\
+     & Iforest RKM &      1148 (±251) &  0.13 (±0.03) & 58.46 (±4.77) \\
+\midrule
+ \multirow{4}{*}{1}    &              RKM &        750 (±30) &  0.19 (±0.01) & 87.59 (±2.69) \\
+     &  RLS-RKM (class) &       \textbf{2966} (±54) &    \textbf{0.0} (±0.0) & \textbf{57.37} (±2.47) \\
+     & RLS-RKM (shared) &        656 (±49) &  0.21 (±0.01) & 84.77 (±2.42) \\
+     & Iforest RKM &      1253 (±152) &   0.14 (±0.0) &  76.28 (±3.1) \\
+\bottomrule
+\end{tabular}
+    \caption{Ablation study over impact of different minority configurations on the performance of RLS samplings.}
+    \label{tab-expr-different_minorities}
+\end{table}

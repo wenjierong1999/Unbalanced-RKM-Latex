@@ -1,0 +1,33 @@
+\begin{algorithm}[H]
+\caption{Training and generation algorithm for one-view Gen-RKM (Dual) \cite{pandeyGenerativeRestrictedKernel2021}}
+\label{alg-gen-rkm-dual}
+\begin{algorithmic}[1]
+\Require training data $\{\bx_i\}_{i=1}^{N}$; mini-batch size $m$; \\
+regularization parameters $\eta, c_{\text{stab}}, \gamma$; \\
+explicit feature map $\bphi_{\boldsymbol{\theta}}(.)$ and explicit pre-image map $\bpsi_{\boldsymbol{\zeta}}(.)$; \\
+dimension of latent space $s$ and number of components for fitting GMM $l$;
+\Procedure{Training}{}
+\LComment{Training loop}
+    \For{each epoch}
+        \For{each mini-batch}
+        \State Get mini-batch $\{\bx_i\}_{i\in B}$ with $B \subset\{1,\dots,N\}$ via uniform sampling
+        \State $\bPhi \gets \bphi_{\boldsymbol{\theta}}(\{\bx_i\}_{i\in B})$ 
+        \State $\bK \gets \bPhi^\top\bPhi$
+        \State $\bH,\Lambda \gets \text{SVD}(\bK)$ \Comment{Eigen-decomposition on kernel matrix}
+        \State $\bW\gets \bPhi\bH^\top$
+        \State $\widehat{\bPhi} \gets \bW \bH$
+        \State update $\{\boldsymbol{\theta},\boldsymbol{\zeta}\} \gets \text{Adam}(\caJ_\text{Gen-RKM})$ \Comment{Update network parameters}
+        \EndFor
+    \EndFor
+\LComment{Final computation step to get all latent variables on full dataset}
+\State $\bPhi_{\text{full}} \gets \bphi_{\boldsymbol{\theta}}(\{\bx_i\}_{i=1}^{N})$
+\State repeat step 7-9 on $\bPhi_{\text{full}}$
+\EndProcedure
+\Procedure{Generation}{}
+\State $p(\bh) \gets \text{GMM}_{l}(\bH)$
+\State $\bh^* \sim p(\bh)$  \Comment{Random sampling from the fitted GMM}
+\State $\bx_{\text{gen}} \gets \bpsi_{\boldsymbol{\zeta}}(\bW \bh^{*})$
+\EndProcedure
+
+\end{algorithmic}
+\end{algorithm}

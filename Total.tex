@@ -1,0 +1,220 @@
+\RequirePackage{fix-cm}
+\documentclass[12pt,a4paper,oneside]{book}
+
+% useful packages
+\usepackage{graphicx,xcolor,textpos}
+%\usepackage{helvet}
+\usepackage{lipsum}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{placeins}
+\usepackage{makecell}
+\usepackage{enumitem}
+\usepackage{nameref}
+\usepackage{subcaption}
+\usepackage{tocloft}
+\usepackage{array}
+\usepackage[english]{babel}
+\usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tikz-cd}
+\usepackage{amssymb}
+%\usepackage{multicol}
+%\usepackage[authoryear]{natbib}
+\usepackage{emptypage}
+\usepackage{setspace}
+\usepackage{sectsty}
+\chapterfont{\fontsize{24}{26}\selectfont}
+\usepackage{svg}
+\usepackage{hyperref}
+  \usepackage[
+    backend=biber,
+    style=ieee,
+  ]{biblatex}
+\usepackage{algorithm} %package for algorithm environments
+\usepackage{algpseudocode}
+\usepackage[noEnd=false]{algpseudocodex}
+\addbibresource{Bibliography/ref_wen.bib}
+\addbibresource{Bibliography/ref_ly.bib}
+\usepackage[toc,page]{appendix}
+\usepackage[toc,acronym,nonumberlist]{glossaries}
+
+% Hide URLs and visited dates in bibliography
+\AtEveryBibitem{\ifentrytype{online}{}{\clearfield{url}\clearfield{urlyear}}}
+
+
+\hypersetup{
+hidelinks,
+colorlinks=true,
+linkcolor=blue,
+citecolor=green
+}
+\SetSinglespace{1.1}% 1.4/1.2
+\singlespacing
+
+\setlength{\parskip}{0.5\baselineskip}
+\setlength{\cftbeforefigskip}{0pt} 
+% Ensure section spacing remains default or adjust as needed
+\titlespacing*{\section}
+{0pt}{\baselineskip}{0.5\baselineskip}
+
+\titlespacing*{\subsection}
+{0pt}{\baselineskip}{0.5\baselineskip}
+
+\makeglossaries
+
+% settings for table of contents and section numbering
+\setcounter{secnumdepth}{2} % numbering to which sublevel?
+\setcounter{tocdepth}{2} % How many levels does the table of contents have?
+
+\newcommand*\cleartoleftpage{%
+  \clearpage
+  \ifodd\value{page}\hbox{}\newpage\fi
+}
+
+% page settings
+\topmargin -10mm
+\textwidth 160truemm
+\textheight 240truemm
+\oddsidemargin 0mm
+\evensidemargin 0mm
+
+% define the KUL colors
+\definecolor{green}{RGB}{172,196,0}
+\definecolor{bluetitle}{RGB}{29,141,176}
+\definecolor{blueaff}{RGB}{0,0,128}
+\definecolor{blueline}{RGB}{82,189,236}
+
+% define units for the text blocks
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
+
+% Redefine Require and Ensure to Input and Output
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+
+%define some useful symbols 
+\newcommand{\bx}{\boldsymbol{x}}
+\newcommand{\by}{\boldsymbol{y}}
+\newcommand{\bz}{\boldsymbol{z}}
+\newcommand{\bu}{\boldsymbol{u}}
+\newcommand{\be}{\boldsymbol{e}}
+\newcommand{\bh}{\boldsymbol{h}}
+\newcommand{\bv}{\boldsymbol{v}}
+\newcommand{\ba}{\boldsymbol{a}}
+\newcommand{\bc}{\boldsymbol{c}}
+\newcommand{\bk}{\boldsymbol{k}}
+
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bSigma}{\mathbf{\Sigma}}
+
+\newcommand{\btheta}{\boldsymbol{\theta}}
+\newcommand{\bmu}{\boldsymbol{\mu}}
+\newcommand{\bPhi}{\boldsymbol{\Phi}}
+\newcommand{\bpsi}{\boldsymbol{\psi}}
+\newcommand{\bphi}{\boldsymbol{\phi}}
+\newcommand{\bzeta}{\boldsymbol{\zeta}}
+\newcommand{\bvarphi}{\boldsymbol{\varphi}}
+
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\caH}{\mathcal{H}}
+\newcommand{\caJ}{\mathcal{J}}
+\newcommand{\caN}{\mathcal{N}}
+
+\newcommand{\E}{\mathbb{E}} %Expectation
+\newcommand{\Var}{\text{Var}} %Variance
+
+\newcommand{\Normal}{\mathcal{N}}
+
+\newtheorem{lemma}{Lemma}
+
+\newcommand{\secref}[1]{\ref{#1}~\nameref{#1}}
+
+% Define your symbols and acronyms in here
+%\input{Preamble/Symbols.tex}
+\input{Preamble/Acronyms.tex}
+\makeglossaries
+
+% Start of the actual document
+\begin{document}
+% FRONT MATTER
+% \frontmatter
+% \rmfamily
+
+\input{Preamble/Titlepage.tex} \cleardoublepage 
+\fontsize{14}{16}\selectfont
+\input{Preamble/Copyright.tex} \cleardoublepage
+\setcounter{page}{0}
+\pagenumbering{roman}
+%\phantomsection
+\input{Preamble/Preface.tex}\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Contents}
+\tableofcontents \cleardoublepage
+\input{Preamble/Summary.tex} \cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures \cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables \cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Algorithms}
+\listofalgorithms
+
+\glsaddall
+\cleardoublepage
+\printglossary[type=\acronymtype,title=Abbreviations] \cleardoublepage
+
+\input{Preamble/ContributionStatement} \cleardoublepage
+
+
+% MAIN MATTER
+\mainmatter
+\setcounter{page}{0}
+\pagenumbering{arabic}
+
+\input{Chapters/Introduction.tex} \cleardoublepage
+
+\input{Chapters/LiteratureReview} \cleardoublepage
+
+\input{Chapters/ProblemStatement} \cleardoublepage
+
+\input{Chapters/Methods}
+
+\input{Chapters/Experiments}
+
+\input{Chapters/Conclusions.tex} \cleardoublepage
+% BACK MATTER (is dit zelfs een woord?)
+
+% BIBLIOGRAPHY
+\addcontentsline{toc}{chapter}{Bibliography}
+%\bibliographystyle{plain}
+%\bibliography{Bibliography/references_wen.bib}
+% \cleardoublepage
+\printbibliography
+
+% APPENDIX
+\begin{appendices}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
+  \input{Backmatter/Appendix.tex}
+\end{appendices}
+
+% Back side of book
+\cleartoleftpage{} % Make sure the back page is at an even page number
+\input{Backmatter/Back.tex}
+
+\end{document}

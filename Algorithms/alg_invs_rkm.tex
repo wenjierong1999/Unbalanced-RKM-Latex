@@ -1,0 +1,23 @@
+\begin{algorithm}[H]
+\caption{inverse frequency sampling for one-view Gen-RKM (Dual)}
+\label{alg-invs-rkm}
+\begin{algorithmic}[1]
+\Require training data $\bD = \{\bx_i, \by_i\}_{i=1}^{N}$; mini-batch size $m$; \\
+regularization parameters $\eta, c_{\text{stab}}, \gamma$; \\
+explicit feature map $\bphi_{\boldsymbol{\theta}}(.)$ and explicit pre-image map $\bpsi_{\boldsymbol{\zeta}}(.)$; \\
+dimension of latent space $s$;
+\LComment{Compute Inverse weight}
+\State $w_i \gets \frac{1}{count(\by_i)}$ \Comment{the reciprocal of the frequency of $\by_i$}
+\State $p_i \gets w_i / \sum_{i=1}^n w_i$
+\LComment{Training loop}
+    \For{each epoch}
+        \For{each mini-batch}
+        \State $B \gets$ sample a mini-batch of size $m$ with probability $\boldsymbol{x}_i \sim p_i$ 
+        \State do step 6-11 in algorithm \ref{alg-gen-rkm-dual}
+        \EndFor
+    \EndFor
+\LComment{Final step to get all latent variables on modified full dataset}
+\State $\bD_{\text{resampled}} \gets$ resample a size $N$ dataset from $\bD$ with probability $\bx_i \sim p_i$ 
+\State repeat step 7-9 in algorithm \ref{alg-gen-rkm-dual}  on $\bD_{\text{resampled}}$
+\end{algorithmic}
+\end{algorithm}

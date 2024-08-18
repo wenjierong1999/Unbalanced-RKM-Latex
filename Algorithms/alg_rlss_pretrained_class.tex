@@ -1,0 +1,25 @@
+\begin{algorithm}[H]
+\caption{RLS Sampling in Gen-RKM with explicit feature map based on a pre-trained classifier}
+\label{alg-rls-rkm-fixed}
+\begin{algorithmic}[1]
+\Require training data $\bD = \{\bx_i\}_{i=1}^{N}$; mini-batch size $m$; \\
+regularization parameters $\eta, c_{\text{stab}}, \gamma_{RKM}$ for Gen-RKM; \\
+explicit feature map $\bphi_{\btheta}(.)$ and explicit pre-image map $\bpsi_{\boldsymbol{\zeta}}(.)$ for Gen-RKM; \\
+pre-trained classifier feature map $\bvarphi(.)$ and regularization $\gamma_{RLS}$ for RLS sampling; \\
+dimension reduction size $k$
+\LComment{Pre-compute RLS}
+\State $\{\widetilde{\bvarphi}(\boldsymbol{x}_i)\}_{i=1}^{N} \gets \text{UMAP}_{k}(\{\bvarphi(\boldsymbol{x}_i)\}_{i=1}^{N})$ \Comment{get UMAP embeddings}
+\State $l_i \gets \widetilde{\bvarphi}(\boldsymbol{x}_i)^\top(\bS_{\Tilde{\bvarphi}}+\gamma_{RLS}\mathbf{I})^{-1}\widetilde{\bvarphi}(\boldsymbol{x}_i)$ \Comment{Compute leverage scores}
+\State $p_i \gets l_i / \sum_{j=1}^n l_j$
+\LComment{Training loop}
+    \For {each epoch}
+        \For{each mini-batch $B \subset \bD$}
+        \State $B \gets$ sample a mini-batch of size $m$ with probability $\boldsymbol{x}_i \sim p_i$ 
+        \State do step 6-11 in algorithm \ref{alg-gen-rkm-dual}
+        \EndFor
+    \EndFor
+\LComment{Modified final computation step in Gen-RKM}
+\State $\bD_{\text{resampled}} \gets$ resample the full dataset with probability $\bx_i \sim p_i$ 
+\State repeat step 7-9 in algorithm \ref{alg-gen-rkm-dual}  on $\bD_{\text{resampled}}$
+\end{algorithmic}
+\end{algorithm}

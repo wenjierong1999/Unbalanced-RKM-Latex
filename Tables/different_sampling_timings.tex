@@ -1,0 +1,17 @@
+\begin{table}[ht]
+\centering
+\begin{tabular}{lccc}
+\toprule
+{} &   Fashion &     MNIST & 012-MNIST \\
+\cmidrule(lr){2-2} \cmidrule(lr){3-3} \cmidrule(lr){4-4}
+Number of samples & 22200   & 32467 & 13261 \\
+\midrule
+Iforest RKM &  391(±18) &  721(±44) &  158(±2) \\
+RKM              &   233(±5) &   326(±4) &   91(±0) \\
+RLS-RKM (class)  &  418(±19) &  737(±13) &  156(±1) \\
+RLS-RKM (shared) &   450(±7) &  1029(±3) &  165(±5) \\
+\bottomrule
+\end{tabular}
+\caption{Training times in seconds (averaged over 3 runs) of different weighted sampling implementations in Gen-RKM. For the unbalanced 012-MNIST, the maximum epoch number is set to 100, while the maximum epoch number in unbalanced MNIST and Fashion MNIST is 150. The batch size is uniformly set to 328 across all cases. All experiments are conducted using a single NVIDIA GeForce RTX 3080 GPU (12GB).}
+\label{tab-sampling-training-time}
+\end{table}
